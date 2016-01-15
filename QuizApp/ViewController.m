@@ -21,6 +21,10 @@
     //バース　mBaaS nifty 無料で使える。セキリティ的にも大丈夫
 }
 @property (weak, nonatomic) IBOutlet UITextView *textBox;//control+ドラッグで関連付ける
+@property (weak, nonatomic) IBOutlet UIButton *batsu_button;
+
+@property (weak, nonatomic) IBOutlet UIButton *maru_button;
+
 @property (strong, nonatomic) AVAudioPlayer *player;
 
 @end
@@ -69,6 +73,8 @@
 
 //////////////* 答え合わせ *////////////////
 -(void) answer {
+    self.maru_button.enabled = NO; //使えなくする
+    self.batsu_button.enabled = NO;
     switch (quiz_num) {
         case 0:
             if(button_status == 1){
@@ -125,6 +131,8 @@
             }
             button_status = 0;
             [self results];
+            self.maru_button.enabled = NO; //使えなくする
+            self.batsu_button.enabled = NO;
             break;
             
     }
@@ -222,6 +230,8 @@
 
 //正解ボタンを押す
 -(void) seikai_on:(id)sender {
+    self.maru_button.enabled = YES; //使えるようにする
+    self.batsu_button.enabled = YES;
     seikai_button.hidden = YES;
     quiz_num++;
     [self quiz];
@@ -229,6 +239,8 @@
 
 //不正解ボタンを押す
 -(void) fuseikai_on:(id)sender {
+    self.maru_button.enabled = YES; //使えるようにする
+    self.batsu_button.enabled = YES;
     fuseikai_button.hidden = YES;
     quiz_num++;
     [self quiz];
@@ -355,6 +367,8 @@
     seikai_button.hidden = YES;
     fuseikai_button.hidden = YES;
     resultLabel.hidden = YES;
+    self.maru_button.enabled = YES; //使えるようにする
+    self.batsu_button.enabled = YES;
     quiz_num = 0;
     score = 0;
     [self quiz];
